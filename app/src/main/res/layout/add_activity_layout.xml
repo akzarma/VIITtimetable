@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="vertical">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/add_t1"
+        android:hint="Start Hour"
+        android:layout_weight="1" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/add_t2"
+        android:hint="Start Minute"
+        android:layout_weight="1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText8"
+        android:hint="End Hour"
+        android:layout_weight="1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText9"
+        android:hint="End Minute"
+        android:layout_weight="1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:hint="Day"
+        android:layout_weight="1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText3"
+        android:hint="Lecture"
+        android:layout_weight="1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText4"
+        android:hint="Class"
+        android:layout_weight="1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText5"
+        android:hint="Branch"
+        android:layout_weight="1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText7"
+        android:hint="Division"
+        android:layout_weight="1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText6"
+        android:hint="Batch"
+        android:layout_weight="1" />
+
+    <Button
+        android:text="Add to File"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/add_act"
+        android:layout_weight="1" />
+
+    <Button
+        android:text="Upload (At Last after adding)"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/button2"
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="Status"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/status"
+        android:layout_weight="0.93"
+        android:textSize="10sp" />
+
+</LinearLayout>
