@@ -1,5 +1,9 @@
 package com.example.akshay.timetable;
-import android.text.format.Time;
+
+
+import com.google.gson.annotations.SerializedName;
+
+import org.json.JSONObject;
 
 import java.io.Serializable;
 /**
@@ -7,7 +11,10 @@ import java.io.Serializable;
  */
 
 public class Lecture implements Serializable{
+
+
     public
+
     int start_hour;
     int start_min;
     int end_hour;
@@ -15,7 +22,8 @@ public class Lecture implements Serializable{
     int day; //sunday=1
     String year;  //FE SE TE BE
     String branch;   //FE COMP IT ENTC CIVIL
-    String lecture; //VTP-MIL
+    String lecture; //MIL
+    String teacher;
     char div; // A B C D.........
     String batch;   //B1 A1
 }

@@ -10,7 +10,6 @@
     </string-array>
 
     <string-array name="div_array">
-        <item>Select Your Division</item>
         <item>A</item>
         <item>B</item>
         <item>C</item>
@@ -37,12 +36,16 @@
         <item>Student</item>
         <item>Teacher</item>
     </string-array>
+    <string-array name="Teacher_name">
+        <item>SBT</item>
+        <item>MPK</item>
+    </string-array>
     <string-array name="branch_array">
-        <item></item>
         <item>COMP</item>
         <item>ENTC</item>
         <item>CIVIL</item>
         <item>IT</item>
         <item>MECH</item>
     </string-array>
+    <string name="title_activity_start">StartActivity</string>
 </resources>

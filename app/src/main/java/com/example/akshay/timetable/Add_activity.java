@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.support.annotation.IntegerRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
@@ -22,10 +23,13 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+
+import com.google.gson.Gson;
 
 
 /**
@@ -41,9 +45,6 @@ public class Add_activity extends Activity {
     EditText div_field;
 
 
-
-
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_activity_layout);
@@ -55,51 +56,55 @@ public class Add_activity extends Activity {
             public void onClick(View v) {
 
 
-                    tv.setText("Uploading...");
+                tv.setText("Uploading...");
 
-                    FirebaseStorage storage = FirebaseStorage.getInstance();
-                    StorageReference storageRef = storage.getReferenceFromUrl("gs://timetable-31fd9.appspot.com").child(year_field.getText().toString()+branch_field.getText().toString()+div_field.getText().toString()+".bin");
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+                StorageReference storageRef = storage.getReferenceFromUrl("gs://timetable-31fd9.appspot.com").child(year_field.getText().toString() + branch_field.getText().toString() + div_field.getText().toString() + ".json");
 
-                    try {
-                        //ObjectOutputStream out = new ObjectOutputStream(openFileOutput("data.bin", MODE_PRIVATE));
-                        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(Environment.getExternalStorageDirectory()+"/timetable/dataAddActivity.bin"));
-                        out.writeObject(al);
+                try {
 
+                    Lecture[] lectures = al.toArray(new Lecture[al.size()]);
 
-                        //final Uri file = Uri.fromFile(new File("/data/data/com.example.akshay.timetable/files/data.bin"));
-                        final Uri file = Uri.fromFile(new File(Environment.getExternalStorageDirectory()+"/timetable/dataAddActivity.bin"));
+                    String json = new Gson().toJson(lectures);
 
-                        storageRef.putFile(file)
-                                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                                        tv.setText("Uploaded!!");
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        tv.setText("Failed to Upload.");
+                    Log.d("CREATION", json);
 
-                                    }
-                                });
+                    FileWriter a = new FileWriter(Environment.getExternalStorageDirectory() + "/timetable/dataAddActivity.json");
+                    a.write(json);
+                    a.close();
 
 
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    final Uri file = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/timetable/dataAddActivity.json"));
+
+                    storageRef.putFile(file)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    tv.setText("Uploaded!!");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    tv.setText("Failed to Upload.");
+
+                                }
+                            });
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 branch_field.setEnabled(true);
                 year_field.setEnabled(true);
                 div_field.setEnabled(true);
 
 
-                i=0;
+                i = 0;
 
 
-
-                }
+            }
 
 
         });
@@ -111,17 +116,16 @@ public class Add_activity extends Activity {
 
                 Button btn = (Button) findViewById(R.id.add_act);
 
-                EditText startHour_field =      (EditText) findViewById(R.id.add_t1);
-                EditText startMinute_field =    (EditText) findViewById(R.id.add_t2);
-                EditText endHour_field =        (EditText) findViewById(R.id.editText8);
-                EditText endMinute_field =      (EditText) findViewById(R.id.editText9);
-                branch_field =                  (EditText) findViewById(R.id.editText5);
-                year_field =                    (EditText) findViewById(R.id.editText4);
-                EditText day_field =            (EditText) findViewById(R.id.editText);
-                EditText lecture_field =        (EditText) findViewById(R.id.editText3);
-                div_field =                     (EditText) findViewById(R.id.editText7);
-                EditText batch_field =          (EditText) findViewById(R.id.editText6);
-
+                EditText startHour_field = (EditText) findViewById(R.id.add_t1);
+                EditText startMinute_field = (EditText) findViewById(R.id.add_t2);
+                EditText endHour_field = (EditText) findViewById(R.id.editText8);
+                EditText endMinute_field = (EditText) findViewById(R.id.editText9);
+                branch_field = (EditText) findViewById(R.id.editText5);
+                year_field = (EditText) findViewById(R.id.editText4);
+                EditText day_field = (EditText) findViewById(R.id.editText);
+                EditText lecture_field = (EditText) findViewById(R.id.editText3);
+                div_field = (EditText) findViewById(R.id.editText7);
+                EditText batch_field = (EditText) findViewById(R.id.editText6);
 
 
                 branch_field.setEnabled(false);
@@ -149,8 +153,8 @@ public class Add_activity extends Activity {
 
                 al.add(temp);
 
-                tv.setText("Last Entry ->"+al.get(i).start_hour+":"+al.get(i).start_min+" - "+al.get(i).end_hour+":"+al.get(i).end_min
-                        +" = "+al.get(i).lecture+" "+al.get(i).year+" "+al.get(i).branch+" "+al.get(i).batch);
+                tv.setText("Last Entry ->" + al.get(i).start_hour + ":" + al.get(i).start_min + " - " + al.get(i).end_hour + ":" + al.get(i).end_min
+                        + " = " + al.get(i).lecture + " " + al.get(i).year + " " + al.get(i).branch + " " + al.get(i).batch);
 
                 i++;
 
